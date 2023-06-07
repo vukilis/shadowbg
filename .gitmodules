@@ -1,0 +1,6 @@
+[submodule "shadowbg-backend"]
+	path = shadowbg-backend
+	url = git@github.com:vukilis/shadowbg-backend.git
+[submodule "shadowbg-frontend"]
+	path = shadowbg-frontend
+	url = git@github.com:vukilis/shadowbg-frontend.git
