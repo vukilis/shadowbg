@@ -1,0 +1,37 @@
+version: "3"
+services:
+    nginx:
+      image: nginx:latest
+      container_name: nginx
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      ports:
+        - 8080:8080
+        - 443:443
+      networks:
+        - net
+    shadowbg_backend:
+      container_name: shadowbg_backend
+      build:
+        context: .
+        dockerfile: shadowbg-backend/DockerfileProd
+      command: "./shadow.bg --port 8001"
+      ports:
+        - "8001:8001"
+      networks:
+      - net
+    shadowbg_frontend:
+      container_name: shadowbg_frontend
+      build:
+        context: .
+        dockerfile: shadowbg-frontend/DockerfileProd
+      command: npm run start
+      volumes:
+      - ".:/shadowbg_frontend_client"
+      - /shadowbg_frontend_client/node_modules
+      ports:
+      - "3000:3000"
+      networks:
+      - net
+networks:
+    net:

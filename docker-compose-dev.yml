@@ -1,0 +1,21 @@
+version: "3"
+services:
+    shadowbg_backend:
+      container_name: shadowbg_backend
+      build:
+        context: .
+        dockerfile: shadowbg-backend/DockerfileDev
+      command: "go run main.go --port 8001"
+      ports:
+        - "8001:8001"
+    shadowbg_frontend:
+      container_name: shadowbg_frontend
+      build:
+        context: .
+        dockerfile: shadowbg-frontend/DockerfileDev
+      command: npm run dev
+      volumes:
+      - ".:/shadowbg_frontend_client"
+      - /shadowbg_frontend_client/node_modules
+      ports:
+      - "3000:3000"
